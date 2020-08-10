@@ -19,9 +19,10 @@ public class AdminHomePageController {
 		return "login";
 	}
 
+	//redirecting to home so it again redirects to login
 	@RequestMapping("/logout")
 	public String logout() {
-		return "login";
+		return "home";
 	}
 	
 	

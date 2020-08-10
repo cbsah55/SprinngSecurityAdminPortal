@@ -22,7 +22,7 @@ public class HomeController {
 	
 	@RequestMapping ("/")
 	public String index() {
-		return "index";
+		return "redirect:/login";
 		
 	}
 	
@@ -39,10 +39,20 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping("/login?success=false")
-	public String loginFailure() {
+	@RequestMapping("/login?error")
+	public String loginFailure(Model model) {
+		model.addAttribute("successMessage", "Email / Password incorrect. Try again with correct password!");
 		
 		return "login";
+	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView logout() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("successMessage", "You are successfully logged out !");
+		mav.setViewName("login");
+		return mav;
+		
 	}
 	
 	@RequestMapping ("/registration")
@@ -60,16 +70,13 @@ public class HomeController {
 		User user = userService.findByEmail(userDto);
 		
 		if(userService.userAlreadyExist(userDto)) {
-			mav.addObject("successMessage", "User with email/username "+userDto.getEmail()+" already exist. Go to login");
+			mav.addObject("registerError", "User with email/username "+userDto.getEmail()+" already exist. Go to login");
 			
 		}else {
 			userService.registerUser(userDto);
 			mav.addObject("successMessage", "You are registered successfully. Go to login!");
 		}
-		
-		
-		
-		
+	
 		mav.setViewName("register");
 		return mav;
 	}
