@@ -8,7 +8,13 @@
 <body>
 <div th:replace="common/header :: nav-bar"/>
 
-<div sec:authentication= "name"></div>
+<div sec:authorize="isAuthenticated()">
+	Welcome <span sec:authentication="name">firstName</span>
+	
+	Assigned Role : <span sec:authentication="principal.authorities">Role</span>
+	<p sec:authorize = "isAnonymous()" >this is not seen by anonnymout</p>
+	
+	</div>
 Profile page
 
 	

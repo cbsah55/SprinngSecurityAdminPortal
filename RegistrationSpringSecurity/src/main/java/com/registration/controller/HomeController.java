@@ -1,5 +1,7 @@
 package com.registration.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +29,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping ("/myprofile")
-	public ModelAndView myProfile() {
+	public ModelAndView myProfile(Principal principal) {
 		ModelAndView mav =  new ModelAndView();
-		
+		System.out.println(principal.getName());
 		mav.setViewName("myprofile");
 		return mav;
 	}

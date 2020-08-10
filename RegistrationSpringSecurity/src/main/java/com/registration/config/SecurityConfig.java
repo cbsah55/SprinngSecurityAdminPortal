@@ -64,7 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				throws IOException, ServletException {
 			if (SecurityContextHolder.getContext().getAuthentication() != null
 					&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
-					&& ((HttpServletRequest) request).getRequestURI().equals("/login")) {
+					&&( ((HttpServletRequest) request).getRequestURI().equals("/login")
+					|| ((HttpServletRequest) request).getRequestURI().equals("/registration")))	{
 				System.out.println("user is authenticated but trying to access login page, redirecting to /");
 				((HttpServletResponse) response).sendRedirect("/myprofile");
 			}

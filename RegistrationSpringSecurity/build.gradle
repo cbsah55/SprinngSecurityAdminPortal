@@ -14,8 +14,10 @@ repositories {
 
 dependencies {
 
-// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
-   implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
+compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
+
+
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
