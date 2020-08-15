@@ -1,6 +1,5 @@
 package com.bookstoreadmin.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.bookstoreadmin.service.UserService;
 import com.bookstoreadmin.service.impl.UserDetailsServiceImpl;
 
 
@@ -55,27 +55,36 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.addFilterBefore(new LoginSecurityFilter(), DefaultLoginPageGeneratingFilter.class);
 					http
 						.authorizeRequests()
-						
-						.antMatchers("/adminportal").permitAll()
-						.antMatchers("/login").permitAll()
+						.antMatchers("/index").authenticated()
 						.antMatchers("/home").hasAnyAuthority("ROLE_ADMIN")
-						.anyRequest().hasAnyAuthority("ROLE_ADMIN")
+						.anyRequest().authenticated()
 						
 						.and()
 						
 						.csrf().disable()
 						.formLogin()
-						.loginPage("/login")
+						.loginPage("/login").permitAll()
+						.loginProcessingUrl("/doLogin")
 						.failureUrl("/login?error")
 						.defaultSuccessUrl("/home")
 						.usernameParameter("email")
 						.passwordParameter("password")
 						
 						.and()
-						.logout()
-						.logoutSuccessUrl("/?logout");
+						.rememberMe()
+						.key("rem-me-key")
+						.rememberMeParameter("rememberme")
+						.rememberMeCookieName("Myrememberme")
+						.tokenValiditySeconds(86400)
+						
+						
+						.and()
+						.logout().permitAll()
+						.deleteCookies("Myrememberme")
+						.logoutUrl("/doLogout");
 	}
 	
 	

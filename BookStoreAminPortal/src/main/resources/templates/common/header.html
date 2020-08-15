@@ -25,12 +25,13 @@
 	<div th:fragment="nav-bar">
 
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class = "container-fluid">
 			<a class="navbar-brand center" th:href="@{/adminportal}">Mero
 				Dokan</a>
-			<div class="buttons">
-
-				<a sec:authorize="isAuthenticated()" th:href="@{/logout}"><button
-						class="myButton" type="button">Logout</button></a>
+			
+				<ul class = "nav pull-right">
+				<li><a sec:authorize="isAuthenticated()" th:href="@{/doLogout}" class = "menu-right">Logout</a></li>
+			</ul>
 			</div>
 		</nav>
 
@@ -48,7 +49,7 @@
 				href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 				rel="stylesheet"
 				integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-				crossorigin="anonymous">
+				crossorigin="anonymous"/>
 
 			<script src="https://kit.fontawesome.com/23e3a01518.js"
 				crossorigin="anonymous"></script>

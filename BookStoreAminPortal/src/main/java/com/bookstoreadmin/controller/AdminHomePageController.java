@@ -1,33 +1,25 @@
 package com.bookstoreadmin.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminHomePageController {
 	
-	
-	
-	@RequestMapping("/adminportal")
-	public String admin() {
-		return "redirect:/login";
-	}
+
 
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		System.out.println("login"+SecurityContextHolder.getContext().getAuthentication());
+		
+		return "loginPage";
 	}
 
-	//redirecting to home so it again redirects to login
-	@RequestMapping("/logout")
-	public String logout() {
-		return "home";
-	}
-	
-	
 	@RequestMapping("/home")
 	public String home() {
-		return "home";
+		System.out.println("home"+SecurityContextHolder.getContext().getAuthentication());
+		return "adminPage";
 	}
 }
