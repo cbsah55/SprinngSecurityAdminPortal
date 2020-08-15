@@ -7,9 +7,9 @@
 
 <body>
 	<div th:replace="common/header :: nav-bar" />
-	<p sec:authorize = "isAuthenticated()" >this is not seen by anonnymout</p>
+	<p sec:authorize="isAuthenticated()">this is not seen by anonnymout</p>
 
-<div class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-5 mx-auto">
 				<div id="first">
@@ -36,12 +36,20 @@
 									class="form-control" aria-describedby="emailHelp"
 									placeholder="Enter Password">
 							</div>
-							
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="rememberme"
+									name="rememberme"> <label class="form-check-label"
+									for="exampleCheck1">Remember me</label>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+
 							<div class="col-md-12 text-center ">
 								<button type="submit"
 									class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
 							</div>
-							
+
 
 						</form>
 
@@ -57,6 +65,6 @@
 
 
 
-		<div th:replace="common/header :: common-scripts" />
+	<div th:replace="common/header :: common-scripts" />
 </body>
 </html>

@@ -105,9 +105,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/myprofile").authenticated().anyRequest().authenticated()
 
 				.and()
+				
 
 				.csrf().disable().formLogin().loginPage("/login").failureUrl("/login?error")
 				.defaultSuccessUrl("/myprofile").usernameParameter("email").passwordParameter("password")
+				
+				.and()
+				.rememberMe()
+				.key("rem-me-key")
+				.rememberMeParameter("rememberme")
+				.rememberMeCookieName("remembermecookie")
+				.tokenValiditySeconds(86400)
+				.alwaysRemember(true)
 
 				.and().logout().logoutSuccessUrl("/?logout=success");
 	}

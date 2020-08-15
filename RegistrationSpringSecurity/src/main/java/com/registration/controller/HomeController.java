@@ -24,7 +24,7 @@ public class HomeController {
 	
 	@RequestMapping ("/")
 	public String index() {
-		return "redirect:/login";
+		return "index";
 		
 	}
 	
